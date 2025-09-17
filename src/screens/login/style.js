@@ -1,4 +1,5 @@
-import styled from "styled-components/native"
+import styled from "styled-components/native";
+import LinearGradient from "react-native-linear-gradient";
 
 export const LoginContainer = styled.View`
     flex: 1;
@@ -46,11 +47,14 @@ export const SenhaInput = styled.TextInput`
     border-radius: 20px;
 `
 export const EntrarButton = styled.TouchableOpacity`
-    padding: 5px 159px;
     height: 40px;
     width: 90%;
     justify-content: center;
     align-items: center;
     border-radius: 100px;
     border: 2px solid rgba(1, 98, 227, 0.70);
+`
+export const EntrarLabel = styled.Text`
+        color: white;
+        font-size: 20px;
 `
