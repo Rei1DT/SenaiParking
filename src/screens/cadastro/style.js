@@ -1,142 +1,98 @@
 import styled from "styled-components/native";
-import { User, Mail, Eye } from "react-native-feather";
+import { LinearGradient } from "expo-linear-gradient";
 import { Dimensions } from "react-native";
 
-const { height } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
+
+const buttonWidth = width * 0.8; // botão ocupa 80% da tela
+const logoSize = width * 0.35;   // logo ocupa 35% da largura da tela
+const inputWidth = width * 0.9;  // inputs ocupam 90% da tela
 
 export const SignUpContainer = styled.View`
     flex: 1;
     background-color: black;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 `
 export const BoxTop = styled.View`
-    height: ${height / 4};
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-`
-export const BoxMid = styled.View`
-    height: ${height / 3};
-    width: 100%;
-    padding-inline: 30px;
-`
-export const BoxBottom = styled.View`
-    height: ${height / 3};
-    width: 100%;
-    align-items: center;
+  align-items: center;
+  margin-bottom: 20px;
 `
 
-export const BoxInputName = styled.View`
-    width: 100%;
-    height: 40px;
-    border-width: 2;
-    margin-top: 10px;
-    flex-direction: row;
-    border-radius: 20px;
-    align-items: center;
-    padding-inline: 5px;
-    background-color: #606060;
-    border-color: #606060;
+export const BoxMid = styled.View`
+  width: 100%;
+  margin-bottom: 20px;
 `
-export const BoxInputEmail = styled.View`
-    width: 100%;
-    height: 40px;
-    border-width: 2;
-    margin-top: 10px;
-    flex-direction: row;
-    border-radius: 20px;
-    align-items: center;
-    padding-inline: 5px;
-    background-color: #606060;
-    border-color: #606060;
-`
-export const BoxInputPass = styled.View`
-    width: 100%;
-    height: 40px;
-    border-width: 2;
-    margin-top: 10px;
-    flex-direction: row;
-    border-radius: 20px;
-    align-items: center;
-    padding-inline: 5px;
-    background-color: #606060;
-    border-color: #606060;
+
+export const BoxBottom = styled.View`
+  align-items: center;
+  margin-top: 20px;
 `
 
 export const Logo = styled.Image`
-
+    width: ${logoSize}px;
+    height: 120px;
+    margin-bottom: 10px;
 `
 
 export const SignUpTitle = styled.Text`
     font-weight: bold;
-    margin-top: 10px;
     color: #ffff;
-    font-size: 40px;
+    font-size: 28px;
 `
 
-export const NameText = styled.Text`
-    margin-top: 10px;
-    margin-left: 5px;
-    color: #ffff;
-`
-export const EmailText = styled.Text`
-    margin-top: 10px;
-    margin-left: 5px;
-    color: #ffff;
-`
-export const PassText = styled.Text`
-    margin-top: 10px;
-    margin-left: 5px;
-    color: #ffff;
+export const BoxInput = styled.View`
+  flex-direction: row;
+  align-items: center;
+  border-width: 1px;
+  border-color: #606060;
+  background-color: #606060;
+  border-radius: 40px;
+  padding: 5px;
+  margin-bottom: 15px;
+  width: ${inputWidth}px;
 `
 
-export const NameInput = styled.TextInput`
-    width: 90%;
-    height: 100%;
-    border-radius: 20px;  
-    padding-left: 5px;
-`
-export const EmailInput = styled.TextInput`
-    width: 90%;
-    height: 100%;
-    border-radius: 20px;
-    padding-left: 5px;
-`
-export const PassInput = styled.TextInput`
-    width: 90%;
-    height: 100%;
-    border-radius: 20px;
-    padding-left: 5px;
+export const StyledInput = styled.TextInput`
+  flex: 1;
+  font-size: 16px;
+  color: #ffff;
 `
 
-export const NameIcon = styled(User)`
-    size: 40px;
-    color: black;
-`
-export const EmailIcon = styled(Mail)`
-    size: 40px;
-    color: black;
-`
-export const PassIcon = styled(Eye)`
-    size: 40px;
-    color: black;
+export const LabelText = styled.Text`
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #ffff;
+  align-self: flex-start;
+  margin-left: ${(width * 0.02)}px;
 `
 
 export const ContainerButton = styled.View`
-    align-items: center;
-    justify-content: center;
-    
+    align-items: center;    
 `
 
 export const Button = styled.TouchableOpacity`
+    width: ${buttonWidth}px;
     height: 50px;
-    align-items: center;
-    justify-content: center;
+    border-radius: 40px;
     overflow: hidden;
 `
+export const GradientButton = styled(LinearGradient).attrs({
+    colors: ["rgba(30, 30, 30, 0.50)", "rgba(1, 98, 227, 0.50)"],
+    start: { x: 0, y: 0 },
+    end: { x: 1, y: 0 },
+})`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  border-width: 2px;
+  border-color: rgba(1, 98, 227, 0.7);
+  border-radius: 40px;
+`
+
 export const ButtonText = styled.Text`
     font-weight: bold;
     color: #ffff;
-    
+    font-size: 16px;
 `

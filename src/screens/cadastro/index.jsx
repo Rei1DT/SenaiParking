@@ -1,7 +1,54 @@
-import { SignUpContainer, BoxTop, BoxMid, BoxBottom, Button, Logo, SignUpTitle, NameText, NameInput, EmailText, EmailInput, PassText, PassInput, BoxInputName, BoxInputEmail, BoxInputPass, NameIcon, EmailIcon, PassIcon, ContainerButton, ButtonText } from "./style"
-import { LinearGradient } from 'expo-linear-gradient';
+import { useState } from "react";
+import {
+    SignUpContainer,
+    BoxTop,
+    BoxMid,
+    BoxBottom,
+    Button,
+    Logo,
+    SignUpTitle,
+    ContainerButton,
+    ButtonText,
+    GradientButton,
+    BoxInput,
+    LabelText,
+    StyledInput,
+} from "./style";
+
+import { User, Mail, Eye } from "react-native-feather";
+
+// 🔹 Componente reutilizável para inputs
+function InputField({ label, placeholder, Icon, ...props }) {
+    return (
+        <>
+            <LabelText>{label}</LabelText>
+            <BoxInput>
+                <StyledInput
+                    placeholder={placeholder}
+                    placeholderTextColor="#aaa"
+                    autoCapitalize="none"
+                    {...props}
+                />
+                <Icon 
+                width={40}
+                height={30}
+                stroke="black" />
+            </BoxInput>
+        </>
+    );
+}
 
 export default function Cadastro() {
+    // 🔹 Estados dos inputs
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSignUp = () => {
+        console.log("Dados do cadastro:", { name, email, password });
+        // Aqui você pode chamar sua API ou serviço de autenticação
+    };
+
     return (
         <SignUpContainer>
             <BoxTop>
@@ -13,58 +60,43 @@ export default function Cadastro() {
             </BoxTop>
 
             <BoxMid>
-                <NameText>Nome Completo</NameText>
-                <BoxInputName>
-                    <NameInput
-                        placeholder="Seu Nome"
-                        keyboardType="default"
-                    ></NameInput>
-                    <NameIcon></NameIcon>
-                </BoxInputName>
-                <EmailText>Email</EmailText>
-                <BoxInputEmail>
-                    <EmailInput
-                        placeholder="********"
-                        keyboardType="default"
-                    ></EmailInput>
-                    <EmailIcon></EmailIcon>
-                </BoxInputEmail>
-                <PassText>Senha</PassText>
-                <BoxInputPass>
-                    <PassInput
-                        placeholder="********"
-                        keyboardType="default"
-
-                    ></PassInput>
-                    <PassIcon></PassIcon>
-                </BoxInputPass>
+                <InputField
+                    label="Nome Completo"
+                    placeholder="Seu Nome"
+                    Icon={User}
+                    iconName="user"
+                    value={name}
+                    onChangeText={setName}
+                />
+                <InputField
+                    label="Email"
+                    placeholder="Digite seu e-mail"
+                    Icon={Mail}
+                    iconName="mail"
+                    keyboardType="email-address"
+                    value={email}
+                    onChangeText={setEmail}
+                />
+                <InputField
+                    label="Senha"
+                    placeholder="Digite sua senha"
+                    Icon={Eye}
+                    iconName="lock"
+                    secureTextEntry
+                    value={password}
+                    onChangeText={setPassword}
+                />
             </BoxMid>
 
             <BoxBottom>
                 <ContainerButton>
                     <Button>
-                        <LinearGradient
-                            colors={['rgba(30, 30, 30, 0.50)', 'rgba(1, 98, 227, 0.50)']}  // Definindo o gradiente
-                            start={{ x: 0, y: 0 }}  // Ponto de início
-                            end={{ x: 1, y: 0 }}    // Ponto final
-                            style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                width: 250,
-                                borderWidth: 2,
-                                borderColor: 'rgba(1, 98, 227, 0.70)',  // Cor da borda
-                                borderRadius: 40,
-                            }}
-                        >
+                        <GradientButton>
                             <ButtonText>Cadastrar</ButtonText>
-                        </LinearGradient>
+                        </GradientButton>
                     </Button>
                 </ContainerButton>
             </BoxBottom>
-
         </SignUpContainer>
-
     )
-
 }
