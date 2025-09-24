@@ -11,7 +11,7 @@ export default function App() {
   return (
     <ContainerApp>
       <StatusBar hidden />
-      <Cadastro />
+      <Login />
     </ContainerApp>
 
   );
