@@ -1,12 +1,12 @@
 import { useState } from "react";
 import {
-    LoginContainer,
+    ExitContainer,
     BoxTop,
     BoxMid,
     BoxBottom,
     Button,
     Logo,
-    LoginTitle,
+    ExitTitle,
     ContainerButton,
     ButtonText,
     GradientButton,
@@ -15,10 +15,10 @@ import {
     StyledInput,
 } from "./style";
 
-import { Mail, Eye } from "react-native-feather";
+import { Truck } from "react-native-feather";
 
 // 🔹 Componente reutilizável para inputs
-function InputField({ label, placeholder, Icon, ...props }) {
+function InputField({ label, placeholder, Icon, value, onChangeText, keyboardType }) {
     return (
         <>
             <LabelText>{label}</LabelText>
@@ -27,7 +27,10 @@ function InputField({ label, placeholder, Icon, ...props }) {
                     placeholder={placeholder}
                     placeholderTextColor="#aaa"
                     autoCapitalize="none"
-                    {...props}
+                    value={value}
+                    onChangeText={onChangeText}
+                    keyboardType={keyboardType}
+
                 />
                 <Icon
                     width={40}
@@ -38,56 +41,46 @@ function InputField({ label, placeholder, Icon, ...props }) {
     );
 }
 
-export default function Cadastro() {
+export default function Entrance() {
     // 🔹 Estados dos inputs
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [placa, setPlaca] = useState("");
 
-    const handleLogin = () => {
-        console.log("Dados do login:", { email, password });
+    const handleExit = () => {
+        console.log("Dados da placa:", { placa });
         // Aqui você pode chamar sua API ou serviço de autenticação
     };
 
     return (
-        <LoginContainer>
+        <ExitContainer>
             <BoxTop>
                 <Logo
                     source={require("../../assets/images/logo.png")}
                     resizeMode="contain"
                 ></Logo>
-                <LoginTitle>Login</LoginTitle>
+                <ExitTitle>Registrar Saída</ExitTitle>
             </BoxTop>
 
             <BoxMid>
                 <InputField
                     label="Email"
-                    placeholder="Digite seu e-mail"
-                    Icon={Mail}
-                    iconName="mail"
+                    placeholder="Digite sua placa"
+                    Icon={Truck}
+                    iconName="truck"
                     keyboardType="email-address"
-                    value={email}
-                    onChangeText={setEmail}
-                />
-                <InputField
-                    label="Senha"
-                    placeholder="Digite sua senha"
-                    Icon={Eye}
-                    iconName="lock"
-                    secureTextEntry
-                    value={password}
-                    onChangeText={setPassword}
+                    value={placa}
+                    onChangeText={setPlaca}
                 />
             </BoxMid>
 
             <BoxBottom>
                 <ContainerButton>
-                    <Button>
+                    <Button onPress={handleExit}>
                         <GradientButton>
-                            <ButtonText>Entrar</ButtonText>
+                            <ButtonText>Registrar</ButtonText>
                         </GradientButton>
                     </Button>
                 </ContainerButton>
             </BoxBottom>
-        </LoginContainer>
+        </ExitContainer>
     )
 }

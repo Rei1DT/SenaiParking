@@ -1,6 +1,5 @@
-import React from 'react';
-import { View, ScrollView, Text } from 'react-native';
-import { Feather, Truck, Calendar, Clock } from 'react-native-feather';
+import { ScrollView, Text } from 'react-native';
+import { Truck, Calendar, Clock } from 'react-native-feather';
 import { Container, Header, VagaItem, IconContainer, TextContainer, Logo} from './style';
 
 const vagas = [
@@ -26,17 +25,17 @@ const VagasScreen = () => {
         {vagas.map((vaga) => (
           <VagaItem key={vaga.id}>
             <IconContainer>
-              <Truck width={24} height={24} color="#4d4d4d" />
+              <Truck width={24} height={24} color="#fffff" />
             </IconContainer>
             <TextContainer>
-              <Text style={{ color: '#4d4d4d', fontSize: 16 }}>
-                <Calendar width={16} height={16} color="#4d4d4d" /> Placa: {vaga.placa}
+              <Text style={{ color: 'white', fontSize: 16 }}>
+                <Calendar width={16} height={16} color="#D" /> Placa: {vaga.placa}
               </Text>
-              <Text style={{ color: '#4d4d4d', fontSize: 14 }}>
-                <Calendar width={16} height={16} color="#4d4d4d" /> Data: {vaga.data}
+              <Text style={{ color: 'white', fontSize: 14 }}>
+                <Calendar width={16} height={16} color="white" /> Data: {vaga.data}
               </Text>
-              <Text style={{ color: '#4d4d4d', fontSize: 14 }}>
-                <Clock width={16} height={16} color="#4d4d4d" /> Hora: {vaga.hora}
+              <Text style={{ color: 'white', fontSize: 14 }}>
+                <Clock width={16} height={16} color="white" /> Hora: {vaga.hora}
               </Text>
             </TextContainer>
           </VagaItem>
