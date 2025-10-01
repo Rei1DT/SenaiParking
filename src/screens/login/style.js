@@ -92,7 +92,16 @@ export const GradientButton = styled(LinearGradient).attrs({
 `
 
 export const ButtonText = styled.Text`
-    font-weight: bold;
-    color: #ffff;
-    font-size: 16px;
+  font-weight: bold;
+  color: #ffff;
+  font-size: 16px;
+`
+export const RegisterLink = styled.TouchableOpacity` 
+  
+`
+export const RegisterText = styled.Text`
+  color: #007BFF;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: underline;
 `

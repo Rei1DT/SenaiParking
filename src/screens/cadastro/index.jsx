@@ -90,7 +90,7 @@ export default function Cadastro() {
 
             <BoxBottom>
                 <ContainerButton>
-                    <Button>
+                    <Button onPress={handleSignUp}>
                         <GradientButton>
                             <ButtonText>Cadastrar</ButtonText>
                         </GradientButton>

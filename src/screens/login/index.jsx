@@ -13,9 +13,13 @@ import {
     BoxInput,
     LabelText,
     StyledInput,
+    RegisterLink,
+    RegisterText,
 } from "./style";
 
 import { Mail, Eye } from "react-native-feather";
+import { useNavigation } from "@react-navigation/native";
+import Cadastro from "../cadastro";
 
 // 🔹 Componente reutilizável para inputs
 function InputField({ label, placeholder, Icon, ...props }) {
@@ -38,15 +42,17 @@ function InputField({ label, placeholder, Icon, ...props }) {
     );
 }
 
-export default function Cadastro() {
+export default function Login() {
+    const navigation = useNavigation()
+    
     // 🔹 Estados dos inputs
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleLogin = () => {
-        console.log("Dados do login:", { email, password });
-        // Aqui você pode chamar sua API ou serviço de autenticação
-    };
+    // const handleLogin = () => {
+    //     console.log("Dados do login:", { email, password });
+    //     // Aqui você pode chamar sua API ou serviço de autenticação
+    // };
 
     return (
         <LoginContainer>
@@ -81,13 +87,18 @@ export default function Cadastro() {
 
             <BoxBottom>
                 <ContainerButton>
-                    <Button>
+                    <Button onPress={() => navigation.navigate('Vagas')}>
                         <GradientButton>
                             <ButtonText>Entrar</ButtonText>
                         </GradientButton>
                     </Button>
                 </ContainerButton>
+
+                <RegisterLink onPress={() => navigation.navigate('SignUp')}>
+                    <RegisterText>Não tem uma conta? Cadastre-se</RegisterText>
+                </RegisterLink>
             </BoxBottom>
+
         </LoginContainer>
     )
 }
