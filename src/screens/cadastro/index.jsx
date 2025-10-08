@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import {
     SignUpContainer,
     BoxTop,
@@ -39,7 +40,20 @@ function InputField({ label, placeholder, Icon, ...props }) {
 }
 
 export default function Cadastro() {
-    // 🔹 Estados dos inputs
+    // const [cep, setCep] = useState("")
+    // const [data, setData] = useState("")
+
+    // function buscarCep(){
+    //     axios.get("viacep.com.br/ws/01001000/json/")
+    //     .then((res) => {
+    //         setData(res.data)
+    //     })
+    //     .catch((err) => {
+    //         console.log("Erro", err)
+    //     })
+    // }
+    
+    //Estados dos inputs
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
