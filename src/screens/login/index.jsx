@@ -87,7 +87,7 @@ export default function Login() {
 
             <BoxBottom>
                 <ContainerButton>
-                    <Button onPress={() => navigation.navigate('Vagas')}>
+                    <Button onPress={() => navigation.navigate('ListaDeVagas')}>
                         <GradientButton>
                             <ButtonText>Entrar</ButtonText>
                         </GradientButton>

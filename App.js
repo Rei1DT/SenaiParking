@@ -3,8 +3,9 @@ import styled from 'styled-components/native';
 import Login from './src/screens/login';
 import Cadastro from './src/screens/cadastro';
 import Lista from './src/screens/lista-vaga';
-import Entrada from './src/screens/entrada'
-import Saida from './src/screens/saida'
+import Entrada from './src/screens/entrada';
+import Saida from './src/screens/saida';
+import Vagas from './src/screens/vagas';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -21,7 +22,8 @@ const Stack = createNativeStackNavigator({
   screens: {
     Login: Login,
     SignUp: Cadastro,
-    Vagas: Lista,
+    ListaDeVagas: Lista,
+    Vagas: Vagas, 
     Entrada: Entrada,
     Saida: Saida,
   },
