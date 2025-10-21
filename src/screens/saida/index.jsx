@@ -29,7 +29,6 @@ function InputField({ label, placeholder, Icon, value, onChangeText, keyboardTyp
                     autoCapitalize="none"
                     value={value}
                     onChangeText={onChangeText}
-                    keyboardType={keyboardType}
 
                 />
                 <Icon
@@ -62,11 +61,10 @@ export default function Entrance() {
 
             <BoxMid>
                 <InputField
-                    label="Email"
+                    label="Placa do Veículo"
                     placeholder="Digite sua placa"
                     Icon={Truck}
                     iconName="truck"
-                    keyboardType="email-address"
                     value={placa}
                     onChangeText={setPlaca}
                 />
