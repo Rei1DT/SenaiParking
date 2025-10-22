@@ -16,6 +16,7 @@ import {
 } from "./style";
 
 import { Truck } from "react-native-feather";
+import { API_BASE_URL, getAxiosWithToken } from '../../api';
 
 // 🔹 Componente reutilizável para inputs
 function InputField({ label, placeholder, Icon, value, onChangeText, keyboardType }) {
@@ -44,9 +45,16 @@ export default function Entrance() {
     // 🔹 Estados dos inputs
     const [placa, setPlaca] = useState("");
 
-    const handleEntrance = () => {
-        console.log("Dados da placa:", { placa });
-        // Aqui você pode chamar sua API ou serviço de autenticação
+    const handleEntrance = async () => {
+        try {
+            const axiosInstance = await getAxiosWithToken();
+            await axiosInstance.post('/api/veiculos/entrada', {
+                placa
+            });
+            alert('Entrada liberada com sucesso!');
+        } catch (error) {
+            alert('Erro ao registrar entrada.');
+        }
     };
 
     return (
