@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text } from "react-native";
-import { Truck, Calendar, Clock } from "react-native-feather";
+import { ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { Calendar, Clock, CreditCard } from "react-native-feather";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { API_BASE_URL, getAxiosWithToken } from "../../api";
@@ -20,6 +20,7 @@ import {
 export default function VagasScreen() {
   const navigation = useNavigation();
   const [vagas, setVagas] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   useEffect(() => {
     async function fetchVagas() {
@@ -43,37 +44,50 @@ export default function VagasScreen() {
 
       <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
         {vagas.map((vaga, idx) => (
-          <VagaItem key={idx}>
-            <IconContainer>
-              <Truck width={24} height={24} color="white" />
-            </IconContainer>
+          <VagaItem
+            key={idx}
+            $active={activeIndex === idx}
+          >
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => setActiveIndex(activeIndex === idx ? null : idx)}
+              style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
+            >
+              <IconContainer style={{ justifyContent: 'center', alignItems: 'center', marginRight: 16 }}>
+                <Image source={require('../../assets/images/car-image.png')} style={{ width: 36, height: 28, resizeMode: 'contain' }} />
+              </IconContainer>
 
-            <TextContainer>
-              <Text style={{ color: "white", fontSize: 16 }}>
-                <Calendar width={16} height={16} color="white" /> Placa: {vaga.placa}
-              </Text>
-              <Text style={{ color: "white", fontSize: 14 }}>
-                <Calendar width={16} height={16} color="white" /> Data: {vaga.dataEntrada}
-              </Text>
-              <Text style={{ color: "white", fontSize: 14 }}>
-                <Clock width={16} height={16} color="white" /> Hora: {vaga.horarioEntrada}
-              </Text>
-            </TextContainer>
+              <TextContainer style={{ flex: 1, justifyContent: 'center' }}>
+                <Text style={{ color: "white", fontSize: 20 }}>
+                  <CreditCard width={16} height={16} color="white" /> Placa: {vaga.placa}
+                </Text>
+                <Text style={{ color: "white", fontSize: 20 }}>
+                  <Calendar width={16} height={16} color="white" /> Data: {vaga.dataEntrada}
+                </Text>
+                <Text style={{ color: "white", fontSize: 20 }}>
+                  <Clock width={16} height={16} color="white" /> Hora: {vaga.horarioEntrada}
+                </Text>
+              </TextContainer>
+            </TouchableOpacity>
 
-            <ContainerButton>
-              <Button onPress={() => navigation.navigate("Entrada")}>
-                <GradientButton>
-                  <ButtonText>Registrar Entrada</ButtonText>
-                </GradientButton>
-              </Button>
-            </ContainerButton>
-            <ContainerButton>
-              <Button onPress={() => navigation.navigate("Saida")}>
-                <GradientButton>
-                  <ButtonText>Registrar Saida</ButtonText>
-                </GradientButton>
-              </Button>
-            </ContainerButton>
+            {activeIndex === idx && (
+              <>
+                <ContainerButton>
+                  <Button onPress={() => navigation.navigate("Entrada")}>
+                    <GradientButton>
+                      <ButtonText>Registrar Entrada</ButtonText>
+                    </GradientButton>
+                  </Button>
+                </ContainerButton>
+                <ContainerButton>
+                  <Button onPress={() => navigation.navigate("Saida")}>
+                    <GradientButton>
+                      <ButtonText>Registrar Saida</ButtonText>
+                    </GradientButton>
+                  </Button>
+                </ContainerButton>
+              </>
+            )}
           </VagaItem>
         ))}
       </ScrollView>

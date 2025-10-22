@@ -26,6 +26,9 @@ export const VagaItem = styled.View`
   margin: 10px 20px;
   border-radius: 10px;
   padding: 15px;
+  /* Adiciona borda azul quando a prop $active for true */
+  border-width: ${props => props.$active ? '2px' : '0px'};
+  border-color: ${props => props.$active ? 'rgba(1, 98, 227, 0.7)' : 'transparent'};
 `;
 
 export const IconContainer = styled.View`
