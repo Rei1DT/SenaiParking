@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios from 'axios';
 import {
     SignUpContainer,
     BoxTop,
@@ -17,6 +17,7 @@ import {
 } from "./style";
 
 import { User, Mail, Eye } from "react-native-feather";
+import { API_BASE_URL } from "../../api";
 
 // 🔹 Componente reutilizável para inputs
 function InputField({ label, placeholder, Icon, ...props }) {
@@ -30,37 +31,33 @@ function InputField({ label, placeholder, Icon, ...props }) {
                     autoCapitalize="none"
                     {...props}
                 />
-                <Icon 
-                width={40}
-                height={30}
-                stroke="black" />
+                <Icon
+                    width={40}
+                    height={30}
+                    stroke="black" />
             </BoxInput>
         </>
     );
 }
 
 export default function Cadastro() {
-    // const [cep, setCep] = useState("")
-    // const [data, setData] = useState("")
-
-    // function buscarCep(){
-    //     axios.get("viacep.com.br/ws/01001000/json/")
-    //     .then((res) => {
-    //         setData(res.data)
-    //     })
-    //     .catch((err) => {
-    //         console.log("Erro", err)
-    //     })
-    // }
-    
     //Estados dos inputs
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSignUp = () => {
-        console.log("Dados do cadastro:", { name, email, password });
-        // Aqui você pode chamar sua API ou serviço de autenticação
+    const handleSignUp = async () => {
+        try {
+            const response = await axios.post(`${API_BASE_URL}/auth/register`, {
+                nome: name,
+                email: email,
+                senha: password
+            });
+            alert('Cadastro realizado com sucesso!');
+            navigation.navigate('Login');
+        } catch (error) {
+            alert('Erro ao fazer cadastro. Verifique suas credenciais.', error);
+        }
     };
 
     return (
