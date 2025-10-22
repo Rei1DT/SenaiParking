@@ -19,7 +19,9 @@ import {
 
 import { Mail, Eye } from "react-native-feather";
 import { useNavigation } from "@react-navigation/native";
-import Cadastro from "../cadastro";
+import { API_BASE_URL } from '../../api';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // 🔹 Componente reutilizável para inputs
 function InputField({ label, placeholder, Icon, ...props }) {
@@ -49,10 +51,19 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // const handleLogin = () => {
-    //     console.log("Dados do login:", { email, password });
-    //     // Aqui você pode chamar sua API ou serviço de autenticação
-    // };
+    const handleLogin = async () => {
+        try {
+            const response = await axios.post(`${API_BASE_URL}/auth/login`, {
+                email: email,
+                senha: password
+            });
+            const token = response.data.token;
+            await AsyncStorage.setItem('token', token);
+            navigation.navigate('ListaDeVagas');
+        } catch (error) {
+            alert('Erro ao fazer login. Verifique suas credenciais.');
+        }
+    };
 
     return (
         <LoginContainer>
@@ -87,7 +98,7 @@ export default function Login() {
 
             <BoxBottom>
                 <ContainerButton>
-                    <Button onPress={() => navigation.navigate('ListaDeVagas')}>
+                    <Button onPress={handleLogin}>
                         <GradientButton>
                             <ButtonText>Entrar</ButtonText>
                         </GradientButton>
