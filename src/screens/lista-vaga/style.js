@@ -40,14 +40,14 @@ export const TextContainer = styled.View`
 `;
 
 export const ContainerButton = styled.View`
-    align-items: center;    
+  align-items: center;    
 `
 
 export const Button = styled.TouchableOpacity`
-    width: ${buttonWidth}px;
-    height: 50px;
-    border-radius: 40px;
-    overflow: hidden;
+  width: ${buttonWidth}px;
+  height: 50px;
+  border-radius: 40px;
+  overflow: hidden;
 `
 export const GradientButton = styled(LinearGradient).attrs({
     colors: ["rgba(30, 30, 30, 0.50)", "rgba(1, 98, 227, 0.50)"],
@@ -67,3 +67,21 @@ export const ButtonText = styled.Text`
     color: #ffff;
     font-size: 16px;
 `
+
+export const FloatingButtonWrapper = styled.View`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  align-items: center;
+  z-index: 10;
+`;
+
+export const FabButton = styled.TouchableOpacity`
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background-color: rgba(1,98,227,0.95);
+  justify-content: center;
+  align-items: center;
+`;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, Image } from "react-native";
-import { Calendar, Clock, CreditCard } from "react-native-feather";
+import { Calendar, Clock, CreditCard, Plus } from "react-native-feather";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 import { API_BASE_URL, getAxiosWithToken } from "../../api";
@@ -14,7 +14,11 @@ import {
   ContainerButton,
   GradientButton,
   Button,
-  ButtonText
+  ButtonText,
+  SimpleButton,
+  ButtonContent,
+  ButtonLabel
+  , FloatingButtonWrapper, FabButton
 } from "./style";
 
 export default function VagasScreen() {
@@ -43,10 +47,18 @@ export default function VagasScreen() {
     <Container>
       <Header>
         <Logo source={require("../../assets/images/logo.png")} resizeMode="contain" />
-        <Text style={{ color: "white", fontSize: 24, marginTop: 10 }}>Lista de Vagas</Text>
+        <Text style={{ color: "white", fontSize: 30, marginTop: 10 }}>Lista de Vagas</Text>
       </Header>
 
-      <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
+      {/* Botão global para registrar nova entrada (aparece uma vez na tela) */}
+        {/* Floating Action Button (Registrar Entrada) */}
+        <FloatingButtonWrapper pointerEvents="box-none">
+          <FabButton onPress={() => navigation.navigate("Entrada")}>
+            <Plus width={28} height={28} color="#fff" />
+          </FabButton>
+        </FloatingButtonWrapper>
+
+  <ScrollView contentContainerStyle={{ paddingVertical: 20, paddingBottom: 120 }}>
         {vagas.map((vaga, idx) => (
           <VagaItem
             key={idx}
@@ -76,13 +88,6 @@ export default function VagasScreen() {
 
             {activeIndex === idx && (
               <>
-                <ContainerButton>
-                  <Button onPress={() => navigation.navigate("Entrada")}>
-                    <GradientButton>
-                      <ButtonText>Registrar Entrada</ButtonText>
-                    </GradientButton>
-                  </Button>
-                </ContainerButton>
                 <ContainerButton>
                   <Button onPress={() => navigation.navigate("Saida")}>
                     <GradientButton>
