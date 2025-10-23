@@ -23,7 +23,6 @@ import { API_BASE_URL } from '../../api';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// 🔹 Componente reutilizável para inputs
 function InputField({ label, placeholder, Icon, ...props }) {
     return (
         <>
@@ -47,7 +46,6 @@ function InputField({ label, placeholder, Icon, ...props }) {
 export default function Login() {
     const navigation = useNavigation()
     
-    // 🔹 Estados dos inputs
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 

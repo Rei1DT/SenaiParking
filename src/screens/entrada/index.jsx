@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
     EntranceContainer,
     BoxTop,
@@ -44,6 +46,7 @@ function InputField({ label, placeholder, Icon, value, onChangeText, keyboardTyp
 export default function Entrance() {
     // 🔹 Estados dos inputs
     const [placa, setPlaca] = useState("");
+    const navigation = useNavigation();
 
     const handleEntrance = async () => {
         try {
@@ -51,9 +54,12 @@ export default function Entrance() {
             await axiosInstance.post('/api/veiculos/entrada', {
                 placa
             });
-            alert('Entrada liberada com sucesso!');
+                        Alert.alert('Sucesso', 'Entrada liberada com sucesso!', [
+                            { text: 'OK', onPress: () => navigation.navigate('ListaDeVagas') }
+                        ], { cancelable: false });
         } catch (error) {
-            alert('Erro ao registrar entrada.');
+                        console.error('Erro ao registrar entrada:', error?.response?.data || error.message || error);
+                        Alert.alert('Erro', 'Erro ao registrar entrada. Tente novamente.');
         }
     };
 

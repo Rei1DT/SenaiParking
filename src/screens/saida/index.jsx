@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
     ExitContainer,
     BoxTop,
@@ -16,10 +18,8 @@ import {
 } from "./style";
 
 import { Truck } from "react-native-feather";
-import { API_BASE_URL, getAxiosWithToken } from '../../api';
-import axios from 'axios';
+import { getAxiosWithToken } from '../../api';
 
-// 🔹 Componente reutilizável para inputs
 function InputField({ label, placeholder, Icon, value, onChangeText, keyboardType }) {
     return (
         <>
@@ -43,8 +43,8 @@ function InputField({ label, placeholder, Icon, value, onChangeText, keyboardTyp
 }
 
 export default function Exit() {
-    // 🔹 Estados dos inputs
     const [placa, setPlaca] = useState("");
+    const navigation = useNavigation();
 
     const handleExit = async () => {
         try {
@@ -52,9 +52,12 @@ export default function Exit() {
             await axiosInstance.put('/api/veiculos/saida', {
                 placa
             });
-            alert('Saída liberada com sucesso!');
+            Alert.alert('Sucesso', 'Saída liberada com sucesso!', [
+                { text: 'OK', onPress: () => navigation.navigate('ListaDeVagas') }
+            ], { cancelable: false });
         } catch (error) {
-            alert('Erro ao registrar saída.');
+            console.error('Erro ao registrar saída:', error?.response?.data || error.message || error);
+            Alert.alert('Erro', 'Erro ao registrar saída. Tente novamente.');
         }
     };
 
