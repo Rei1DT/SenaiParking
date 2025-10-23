@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, Image } from "react-native";
 import { Calendar, Clock, CreditCard } from "react-native-feather";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 import { API_BASE_URL, getAxiosWithToken } from "../../api";
 import {
@@ -19,21 +19,25 @@ import {
 
 export default function VagasScreen() {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
   const [vagas, setVagas] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
 
-  useEffect(() => {
-    async function fetchVagas() {
-      try {
-        const axiosInstance = await getAxiosWithToken();
-        const response = await axiosInstance.get('/api/veiculos');
-        setVagas(response.data);
-      } catch (error) {
-        setVagas([]);
-      }
+  async function fetchVagas() {
+    try {
+      const axiosInstance = await getAxiosWithToken();
+      const response = await axiosInstance.get('/api/veiculos');
+      setVagas(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar vagas:', error?.response?.data || error.message || error);
+      setVagas([]);
     }
-    fetchVagas();
-  }, []);
+  }
+
+  useEffect(() => {
+    // Recarrega a lista sempre que a tela fica em foco
+    if (isFocused) fetchVagas();
+  }, [isFocused]);
 
   return (
     <Container>
