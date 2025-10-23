@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
+import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
     SignUpContainer,
     BoxTop,
@@ -19,7 +21,6 @@ import {
 import { User, Mail, Eye } from "react-native-feather";
 import { API_BASE_URL } from "../../api";
 
-// 🔹 Componente reutilizável para inputs
 function InputField({ label, placeholder, Icon, ...props }) {
     return (
         <>
@@ -41,10 +42,10 @@ function InputField({ label, placeholder, Icon, ...props }) {
 }
 
 export default function Cadastro() {
-    //Estados dos inputs
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigation = useNavigation();
 
     const handleSignUp = async () => {
         try {
@@ -53,10 +54,17 @@ export default function Cadastro() {
                 email: email,
                 senha: password
             });
-            alert('Cadastro realizado com sucesso!');
-            navigation.navigate('Login');
+            Alert.alert(
+                'Sucesso',
+                'Cadastro realizado com sucesso!',
+                [
+                    { text: 'OK', onPress: () => navigation.navigate('Login') }
+                ],
+                { cancelable: false }
+            );
         } catch (error) {
-            alert('Erro ao fazer cadastro. Verifique suas credenciais.', error);
+            console.error('Erro no cadastro:', error?.response?.data || error.message || error);
+            Alert.alert('Erro', 'Erro ao fazer cadastro. Verifique suas credenciais e tente novamente.');
         }
     };
 
