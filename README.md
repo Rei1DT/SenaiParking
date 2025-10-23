@@ -38,9 +38,6 @@ Você pode:
 SenaiParking/
  ┣ assets/
  ┣ src/
- ┃ ┣ components/
- ┃ ┃ ┣ ButtonGradient.js
- ┃ ┃ ┗ Input.js
  ┃ ┣ screens/
  ┃ ┃ ┣ Login/
  ┃ ┃ ┣ Cadastro/
@@ -49,7 +46,6 @@ SenaiParking/
  ┃ ┃ ┗ Saida/
  ┃ ┣ services/
  ┃ ┃ ┗ api.js         # Configura a conexão com a API (axios)
- ┃ ┗ styles/
  ┣ App.js              # Define rotas de navegação e tema base
  ┣ Documentação_ParkingAPI.md
  ┣ mise.toml           # Travamento de versões (Node, NPM, etc)
@@ -93,15 +89,13 @@ Abra o app **Expo Go** no seu celular e escaneie pra ver o app rodando.
 Tela com inputs de **e-mail** e **senha**, e botão pra acessar o app.  
 
 ### 🧾 Cadastro  
-Campo de **nome** e **e-mail**, botão pra salvar.  
+Campo de **nome**, **e-mail** e **senha**, botão pra salvar.  
 
 ### 🚘 Lista de Vagas  
 Mostra todos os veículos estacionados, com:  
 - **Placa**
 - **Data de entrada**
-- **Hora de entrada**  
-
-Cada item tem botões pra registrar **entrada** ou **saída**, levando pra tela correta.  
+- **Hora de entrada**   
 
 ### 🕓 Entrada  
 Input pra digitar a placa do carro e registrar a entrada (salva na API).  
@@ -148,15 +142,6 @@ Basta rodar:
 mise install
 ```
 que ele baixa a versão correta do **Node** e **npm** pro projeto.  
-
----
-
-## 📚 Próximos passos  
-- [ ] Conectar com banco de dados real  
-- [ ] Autenticação JWT  
-- [ ] Histórico de veículos (entradas/saídas)  
-- [ ] Tema escuro e responsividade total  
-- [ ] Deploy do backend na nuvem  
 
 ---
 
